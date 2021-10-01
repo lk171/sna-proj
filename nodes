@@ -1,27 +1,37 @@
-id,name,vorname,sex,year,region,type,statements,protest
-1,Balzer,Rainer,1,1959,Bruchsal (29),2,1,1
-2,Baron,Anton,1,1987,Hohenlohe (21),2,,
-3,Eisenhut,Bernhard,1,1958,Singen (57),2,,
-4,Gossner,Hans-Juergen,1,1970,Goeppingen (10),2,,
-5,Grimmer,Bernd,1,1950,Pforzheim (42),2,2,2
-6,Goegel,Bernd,1,1955,Enz (44),2,1,2
-7,Hellstern,Uwe,1,1960,Freudenstadt (45),2,1,2
-8,Hoerner,Hans-Peter,1,1951,Balingen (63),2,1,2
-9,Klauss,Miguel,1,1986,Calw (43),2,1,
-10,Klos,Ruediger ,1,1960,Tuttlingen-Donaueschingen (55),2,1,1
-11,Lindenschmid,Daniel,1,1992,Backnang (17),2,1,1
-12,Podeswa,Rainer,1,1957,Eppingen (19),2,1,
-13,Rupp,Ruben,1,1990,Schwaebisch Gmuend (25),2,,
-14,Stein,Udo,1,1983,Schwaebisch Hall (22),2,,
-15,Steyer,Joachim,1,1966,Hechingen-Muensingen (61),2,,
-16,Saenze,Emil,1,1950,Rottweil (53),2,,
-17,Wolle,Carola ,2,1963,Neckarsulm (20),2,,
-18,AfD,,,2013,,1,,
-19,Junge Alternative,,,2013,,1,,
-20,Fluegel,,,2015,,1,,
-21,Christen in der AfD,,,2013,,1,,
-22,Querdenken,,,2020,,1,,
-23,Identitaere Bewegung,,,2012,,1,,
-24,Demo fuer alle,,,2016,,1,,
-25,Erfurter Resolution,,,2015,,1,,
-26,Stuttgarter Aufruf,,,2018,,1,,
+id,name,vorname,sex,year,region,type,statements,protest,erfurter,stuttgarter aufruf
+1,Balzer,Rainer,1,1959,Bruchsal (29),2,1,1,1,2
+2,Baron,Anton,1,1987,Hohenlohe (21),2,2,2,2,2
+3,Eisenhut,Bernhard,1,1958,Singen (57),2,2,2,2,2
+4,Gossner,Hans-Jürgen,1,1970,Göppingen (10),2,2,2,2,2
+5,Grimmer,Bernd,1,1950,Pforzheim (42),2,2,2,1,1
+6,Gögel,Bernd,1,1955,Enz (44),2,1,2,1,2
+7,Hellstern,Uwe,1,1960,Freudenstadt (45),2,1,2,2,2
+8,Hörner,Hans-Peter,1,1951,Balingen (63),2,1,2,2,2
+9,Klauss,Miguel,1,1986,Calw (43),2,1,2,2,2
+10,Klos,Rüdiger ,1,1960,Tuttlingen-Donaueschingen (55),2,1,1,1,1
+11,Lindenschmid,Daniel,1,1992,Backnang (17),2,1,1,1,2
+12,Podeswa,Rainer,1,1957,Eppingen (19),2,1,2,2,1
+13,Rupp,Ruben,1,1990,Schwäbisch Gmünd (25),2,2,2,2,2
+14,Stein,Udo,1,1983,Schwäbisch Hall (22),2,1,2,1,2
+15,Steyer,Joachim,1,1966,Hechingen-Münsingen (61),2,2,2,2,2
+16,Sänze,Emil,1,1950,Rottweil (53),2,1,2,2,1
+17,Wolle,Carola ,2,1963,Neckarsulm (20),2,1,1,1,1
+18,AfD,,,2013,,1,,,,
+19,Junge Alternative,,,2013,,1,,,,
+20,Flügel,,,2015,,1,,,,
+21,Christen in der AfD,,,2013,,1,,,,
+22,Querdenken,,,2020,,1,,,,
+23,Identitäre Bewegung,,,2012,,1,,,,
+24,Demo für alle,,,2016,,1,,,,
+25,Erfurter Resolution,,,2015,,1,,,,
+26,Stuttgarter Aufruf,,,2018,,1,,,,
+27,Weidel,Alice Elisabeth,2,,Bodensee,3,,,,
+28,Hess,Martin Alexander,1,1971,Ludwigsburg,3,,,,
+29,Spaniel,Dirk,1,1971,Stuttgart 1,3,1,,2,2
+30,Frohnmaier,Markus-Cornel,1,,Böblingen,3,1,,1,2
+31,Jongen,Marc Stephan,1,1968,Neckar-Zaber,3,1,,2,2
+32,Bernhard,Marc Albert,1,1972,Karlsruhe,3,1,2,2,2
+33,Kaufmann,Malte,1,1976,Heidelberg,3,1,1,2,2
+34,Baum,Christina,2,1956,Odenwald-Tauber,3,1,1,1,1
+35,Seitz,Thomas Michael Konrad,1,1967,Emmendingen-Lahr,3,1,2,1,2
+36,Braun,Jürgen Friedrich,1,1961,Weiblingen,3,2,2,2,1

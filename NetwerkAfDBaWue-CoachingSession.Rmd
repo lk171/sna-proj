@@ -1,0 +1,210 @@
+---
+title: "Coaching Session 25.10.2021"
+author: "Lukas Hannig, Leonie Kupferschmidt, Jana Prochazka, Antonia Zwicker"
+date: "20 10 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Coaching Session
+
+## Ideen für den edit Bericht
+
+Grundsätzlich möchten wir uns von der "Machart" her an einem Artikel des Katapult-Magazins orientieren:\
+<https://katapult-magazin.de/de/artikel/30-bis-66-prozent-rechtsextrem>
+
+-   Definitionen für wichtige Begriffe liefern
+
+-   Organisationen und Akteure näher beschreiben (die besonders auffälligen)
+
+-   Einteilung der Akteure in moderat, rechts und sehr rechts (je nach Datenlage)
+
+-   Wichtige (öffentlich zugängliche) Quellen nennen und ggf. erklären
+
+-   U.U. auch andere Rechercheprojekte zum Thema erwähnen (so können die Menschen weiterlesen und sich informieren)
+
+**Kerngedanke bzw. -aussage des Beitrages:**
+
+Wie stark sind baden-württembergische AfDler:innen in rechtsextreme Gruppierungen vernetzt und welche besonderen Verbindungen und Effekte lassen sich erkennen? Gibt es besonders wichtige Akteure?
+
+## Ideen für die Visualisierung unserer Daten
+
+-   Ein oder mehrere Netzwerke mit flourish (mit der Möglichkeit zu filtern)
+
+    -   Filtern nach Aktueren mit Verbindungen zu bestimmten Vereinigungen
+
+    -   Filtern nach anderen Eigenschaften (bspw. Alter o.ä.)
+
+-   Mehrere Ego-Netzwerke (um die Einflüsse der Akteure hervorzuheben)
+
+    -   AfD als Standard
+
+    -   Junge Alternative
+
+    -   Identitäre Bewegung
+
+    -   Flügel
+
+-   *types* auf jeden Fall unterschiedlich darstellen
+
+-   Knotengröße nach Anzahl der Verbindungen verändern
+
+## Mögliche Theorien
+
+-   Aktivitäts-Foki
+
+    -   Sind Mitglieder bestimmter Organisationen generell stärker vernetzt?
+
+    -   Sind Mitglieder bestimmter Organisationen mit bestimmten anderen Organisationen verknüpft?
+
+-   Homophilie
+
+    -   einzige Anhaltspunkte wären hier geograpische Herkunft (bzw. Wahlkreise) oder Alter
+
+    -   fällt eher weg
+
+-   (negative) Transitivität
+
+    -   Korellieren bestimmte Mitgliedschaften miteinander (bspw. JA und IB, ...)?
+
+    -   Umgekehrte Wirkung: AfDler:innen, die nicht im Flügel sind, sind auch seltener in der bspw. IB?
+
+-   Zugang zu Informationen / Macht
+
+    -   zeigt sich bei den "inoffiziellen" Organisationen, wie IB oder Flügel genauso viel oder gar mehr Vernetzung, wie bei den "offiziellen" (AfD, JA etc.)
+
+-   Koordination
+
+    -   hohe Zentralisierung führt zu koordiniertem Handeln
+
+    -   wäre interessant, aber eher für eine andere Recherche
+
+        -   Sind IB oder JA enger um bestimmte Personen vernetzt als die AfD und dementsprechend "schlagkräftiger"?
+
+## Offene Fragen
+
+-   Wie wünschen Sie sich den Umfang des Artikels? (2000 Wörter sind ja schon sehr viel)
+
+-   Wie genau sollen wir den Forschungsbericht aufbauen?
+
+    -   bisher recht wenig Input diesbezüglich
+
+    -   Beispiele sind sehr umfangreich
+
+    -   Abgabe in welcher Form (pdf, word, rmd, ...)
+
+-   Generell etwas Input zum Thema Datenaufbereitung wäre noch interessant.
+
+# Aktuelles Skript
+
+Wir haben bereits etwas mit verschiedenen Visualisierungen herumprobiert:
+
+**Codebuch**
+
+<https://raw.githubusercontent.com/hanniglu/sna-proj/main/codebuch>
+
+**Edgelist**
+
+<https://raw.githubusercontent.com/hanniglu/sna-proj/main/edges>
+
+**Nodelist**
+
+<https://raw.githubusercontent.com/hanniglu/sna-proj/main/nodes>
+
+*Die Recherchen sind noch nicht zu 100% abgeschlossen und dementsprechend unter Umständen noch nicht alle Verbindungen sichtbar.*
+
+```{r Bibliotheken laden, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+library(tidyverse)
+library(igraph)
+library(knitr)
+library(visNetwork)
+```
+
+```{r Datensatz laden und einlesen, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+# Github
+el <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/edges", header=T, as.is=T, sep = ",")
+nodes <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/nodes", header=T, as.is=T, sep = ",")
+# Matrix erstellen
+edgematrix <-as.matrix(el)
+# Zusammenführen von Edge- und Nodelist als igraph-Objekt
+g <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=F)
+```
+
+```{r Visualisieren, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+shape <-vcount(g)
+shape [V(g)$type == "1"] <- "square"
+shape [V(g)$type == "2"] <- "circle"
+shape [V(g)$type == "3"] <- "rectangle"
+plot.igraph(g,vertex.size=15,vertex.shape=shape,asp=0,
+    layout=layout.auto)
+```
+
+```{r}
+wolle <- make_ego_graph(g, order = 1, nodes = V(g)$name == "Wolle", mode ="all")
+wolle
+
+wolle1<- wolle[[1]]
+
+plot(wolle1, 
+     main="Ego-Netzwerk Carola Wolle, erster Grad",
+     vertex.color="gold",
+     edge.color="grey80",
+     edge.arrow.size=.3,
+     edge.curved=curve_multiple(wolle1),
+     sub="nur direkte Beziehungen des ersten Grads")
+shape <-vcount(wolle1)
+shape [V(wolle1)$type == "1"] <- "square"
+shape [V(wolle1)$type == "2"] <- "circle"
+plot.igraph(wolle1,vertex.size=15,vertex.shape=shape,
+    layout=layout.auto)
+
+V(wolle1)[V(wolle1)$type == 1]$color <- "pink" 
+V(wolle1)[V(wolle1)$type == 2]$color <- "lightblue"
+V(wolle1)[V(wolle1)$type == 2]$shape <- "circle" 
+V(wolle1)[V(wolle1)$type == 1]$shape <- "square"
+
+plot(wolle1, 
+     main="Ego-Netzwerk Carola Wolle, erster Grad",
+     edge.color="grey80",
+     edge.arrow.size=.3,
+     edge.curved=curve_multiple(wolle1),
+     sub="nur direkte Beziehungen des ersten Grads")
+```
+
+```{r}
+ds <- degree(g)
+ds
+
+
+par(mfrow=c(1,2.5), mar=c(0,0,2,1))
+shape <-vcount(g)
+shape [V(g)$type == "1"] <- "square"
+shape [V(g)$type == "2"] <- "circle"
+shape [V(g)$type == "3"] <- "rectangle"
+V(g)[V(g)$type == 1]$color <- "pink" 
+V(g)[V(g)$type == 2]$color <- "lightblue"
+
+plot.igraph(g,vertex.shape=shape,
+    layout=layout.auto,edge.curved=curve_multiple(g),vertex.label=NA,vertex.size=ds, main="Gesamtnetzwerk")
+plot(wolle1, main="Ego-Netzwerk Wolle")
+par(mfrow=c(1,1), mar=c(0,0,1,1))
+```
+
+```{r}
+ds <- degree(g)
+ds
+par(mfrow=c(1,1), mar=c(0,0,0,0))
+
+shape <-vcount(g)
+shape [V(g)$type == "1"] <- "square"
+shape [V(g)$type == "2"] <- "circle"
+shape [V(g)$type == "3"] <- "rectangle"
+V(g)[V(g)$type == 1]$color <- "red" 
+V(g)[V(g)$type == 2]$color <- "lightblue"
+V(g)[V(g)$type == 3]$color <- "blue"
+plot.igraph(g,vertex.shape=shape,
+    layout=layout.auto,edge.curved=curve_multiple(g),vertex.label=NA,vertex.size=ds, main="Gesamtnetzwerk")
+```

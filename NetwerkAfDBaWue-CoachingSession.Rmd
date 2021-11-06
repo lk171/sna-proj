@@ -1,80 +1,52 @@
 ---
-title: "Coaching Session 25.10.2021"
+title: "Forschungsbericht AfD BaWue"
 author: "Lukas Hannig, Leonie Kupferschmidt, Jana Prochazka, Antonia Zwicker"
-date: "20 10 2021"
-output: html_document
+date: "05 11 2021"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+editor_options:
+  markdown:
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Coaching Session
-
-## Ideen für den edit Bericht
-
-Grundsätzlich möchten wir uns von der "Machart" her an einem Artikel des Katapult-Magazins orientieren:\
-<https://katapult-magazin.de/de/artikel/30-bis-66-prozent-rechtsextrem>
-
--   Definitionen für wichtige Begriffe liefern
-
--   Organisationen und Akteure näher beschreiben (die besonders auffälligen)
-
--   Einteilung der Akteure in moderat, rechts und sehr rechts (je nach Datenlage)
-
--   Wichtige (öffentlich zugängliche) Quellen nennen und ggf. erklären
-
--   U.U. auch andere Rechercheprojekte zum Thema erwähnen (so können die Menschen weiterlesen und sich informieren)
-
-**Kerngedanke bzw. -aussage des Beitrages:**
-
-Wie stark sind baden-württembergische AfDler:innen in rechtsextreme Gruppierungen vernetzt und welche besonderen Verbindungen und Effekte lassen sich erkennen? Gibt es besonders wichtige Akteure?
-
-## Ideen für die Visualisierung unserer Daten
-
--   Ein oder mehrere Netzwerke mit flourish (mit der Möglichkeit zu filtern)
-
-    -   Filtern nach Aktueren mit Verbindungen zu bestimmten Vereinigungen
-
-    -   Filtern nach anderen Eigenschaften (bspw. Alter o.ä.)
-
--   Mehrere Ego-Netzwerke (um die Einflüsse der Akteure hervorzuheben)
-
-    -   AfD als Standard
-
-    -   Junge Alternative
-
-    -   Identitäre Bewegung
-
-    -   Flügel
-
--   *types* auf jeden Fall unterschiedlich darstellen
-
--   Knotengröße nach Anzahl der Verbindungen verändern
+# Forschungsbericht
 
 ## Mögliche Theorien
 
 -   Aktivitäts-Foki
 
-    -   Sind Mitglieder bestimmter Organisationen generell stärker vernetzt?
+    -   Sind Mitglieder bestimmter Organisationen generell stärker
+        vernetzt?
 
-    -   Sind Mitglieder bestimmter Organisationen mit bestimmten anderen Organisationen verknüpft?
+    -   Sind Mitglieder bestimmter Organisationen mit bestimmten anderen
+        Organisationen verknüpft?
 
 -   Homophilie
 
-    -   einzige Anhaltspunkte wären hier geograpische Herkunft (bzw. Wahlkreise) oder Alter
+    -   einzige Anhaltspunkte wären hier geograpische Herkunft (bzw.
+        Wahlkreise) oder Alter
 
     -   fällt eher weg
 
 -   (negative) Transitivität
 
-    -   Korellieren bestimmte Mitgliedschaften miteinander (bspw. JA und IB, ...)?
+    -   Korellieren bestimmte Mitgliedschaften miteinander (bspw. JA und
+        IB, ...)?
 
-    -   Umgekehrte Wirkung: AfDler:innen, die nicht im Flügel sind, sind auch seltener in der bspw. IB?
+    -   Umgekehrte Wirkung: AfDler:innen, die nicht im Flügel sind, sind
+        auch seltener in der bspw. IB?
 
 -   Zugang zu Informationen / Macht
 
-    -   zeigt sich bei den "inoffiziellen" Organisationen, wie IB oder Flügel genauso viel oder gar mehr Vernetzung, wie bei den "offiziellen" (AfD, JA etc.)
+    -   zeigt sich bei den "inoffiziellen" Organisationen, wie IB oder
+        Flügel genauso viel oder gar mehr Vernetzung, wie bei den
+        "offiziellen" (AfD, JA etc.)
 
 -   Koordination
 
@@ -82,11 +54,13 @@ Wie stark sind baden-württembergische AfDler:innen in rechtsextreme Gruppierung
 
     -   wäre interessant, aber eher für eine andere Recherche
 
-        -   Sind IB oder JA enger um bestimmte Personen vernetzt als die AfD und dementsprechend "schlagkräftiger"?
+        -   Sind IB oder JA enger um bestimmte Personen vernetzt als die
+            AfD und dementsprechend "schlagkräftiger"?
 
 ## Offene Fragen
 
--   Wie wünschen Sie sich den Umfang des Artikels? (2000 Wörter sind ja schon sehr viel)
+-   Wie wünschen Sie sich den Umfang des Artikels? (2000 Wörter sind ja
+    schon sehr viel)
 
 -   Wie genau sollen wir den Forschungsbericht aufbauen?
 
@@ -96,11 +70,474 @@ Wie stark sind baden-württembergische AfDler:innen in rechtsextreme Gruppierung
 
     -   Abgabe in welcher Form (pdf, word, rmd, ...)
 
--   Generell etwas Input zum Thema Datenaufbereitung wäre noch interessant.
+-   Generell etwas Input zum Thema Datenaufbereitung wäre noch
+    interessant.
+
+# Gliederung
+
+1.  Einleitung 
+
+    1.  Forschungsfrage (T)
+
+    2.  Arbeitshypothesen (T)
+
+    3.  Theoretische Zugänge (T)
+
+    4.  Literaturübersicht (T)
+
+    5.  Akteure (T) 
+
+        1.  Warum haben wir welche Akteure ausgewählt?
+
+            1.  Quelle für JA:
+                <https://netzpolitik.org/2019/wir-veroeffentlichen-das-verfassungsschutz-gutachten-zur-afd/#2019-01-15_BfV-AfD-Gutachten_A-I-1> 
+
+        2.  Welche Akteure gibt es?
+
+2.  Hauptteil
+
+    1.  Datenerhebung (Le)
+
+        1.  Datenzugang
+
+        2.  Bereinigung des Datensatzes
+
+        3.  Codebuch
+
+    2.  Auswertung/Interpretation/Analyse der Daten (Lu)
+
+        1.  Gesamtnetzwerk 
+
+            1.  Wie viele Akteure, wie viele Edges etc
+
+            2.  Dichte etc
+
+        2.  Teilnetzwerke
+
+            1.  Dichte
+
+            2.  weitere Maße
+
+            3.  Interessante Cluster/Komponenten
+
+        3.  Zentralitätsmaße(?)
+
+    3.  Visualisierung (L)
+
+        1.  Welche Ego-Netzwerke untersuchen wir?
+
+        2.  Welche Arten und Weisen der Darstellung sind interessant?
+
+        3.  Filterungen
+
+3.  Schluss
+
+    1.  Zentrale Erkenntnisse (J)
+
+        1.  Hypothesenüberprüfung
+
+        2.  Netzwerkanalytische Erkenntnisse
+
+        3.  Politische/Gesellschaftliche Erkenntnisse
+
+    2.  Limitationen (J)
+
+        1.  Grenzen der Arbeit
+
+        2.  Grenzen der Literatur
+
+        3.  Grenzen der Wissenschaft?
+
+    3.  Fazit
+
+    4.  Teamreflexion (J)
+
+4.  Anlagen
+
+    1.  Literatur (T)
+
+    2.  Quellen (Le)
+
+    3.  Datensatz \[githhub\] 
+
+    4.  Verzeichnisse
+
+        1.  Abbildungen
+
+        2.  Tabellen
+
+        3.  Abkürzungen?
+
+    5.  Eidesstattliche Versicherung
 
 # Aktuelles Skript
 
-Wir haben bereits etwas mit verschiedenen Visualisierungen herumprobiert:
+## 1. Einleitung
+
+### 1. Forschungsfrage (T)
+
+### 2. Arbeitshypothesen (T)
+
+### 3. Theoretische Zugänge (T)
+
+### 4. Literaturübersicht (T)
+
+### 5. Akteure (T)
+
+#### 1. Warum haben wir welche Akteure ausgewählt?
+
+##### 1. Quelle für JA:
+
+                [<https://netzpolitik.org/2019/wir-veroeffentlichen-das-verfassungsschutz-gutachten-zur-afd/#2019-01-15_BfV-AfD-Gutachten_A-I-1>](https://netzpolitik.org/2019/wir-veroeffentlichen-das-verfassungsschutz-gutachten-zur-afd/#2019-01-15_BfV-AfD-Gutachten_A-I-1){.uri}
+
+#### 2. Welche Akteure gibt es?
+
+## 2. Hauptteil
+
+### 1. Datenerhebung (Le)
+
+#### 1. Datenzugang
+
+#### 2. Bereinigung des Datensatzes
+
+#### 3. Codebuch
+
+### 2. Auswertung/Interpretation/Analyse der Daten (Lu)
+
+#### 1. Gesamtnetzwerk
+
+```{r Bibliotheken laden, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+library(tidyverse)
+library(igraph)
+library(knitr)
+library(visNetwork)
+```
+
+```{r Datensatz laden und igraph erstellen, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+# Github
+el <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/edges", header=T, as.is=T, sep = ",")
+nodes <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/nodes", header=T, as.is=T, sep = ",")
+# Matrix erstellen
+edgematrix <-as.matrix(el)
+# igraph-Objekt
+g <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=F)
+```
+
+Zunächst einmal verschaffen wir uns einen Überblick über das
+Gesamtnetzwerk. Zur besseren Übersichtlichkeit werden die Nodes schon
+einmal anhand ihrer Degree-Werte skaliert.
+
+```{r Überischt Gesamtnetzwerk, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+gind <- degree(g, mode = "in")
+
+plot(g,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_kk, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
+     main="Gesamtnetzwerk", # Hauptüberschrift
+     sub="Organisation = Blau - Person = Orange", # Unterüberschrift
+     vertex.size=gind*0.8+5) # Größe der Knoten
+```
+
+##### 1. Größe des Netzwerkes
+
+Das Netzwerk besteht insgesamt aus 46 Knoten und 87 Kanten, die
+ausschließlich zwischen Personen und Organisationen liegen.
+
+Da wir an die Größe der ausgewählten Gruppen gebunden sind, ist die
+Netzwerkgröße und die Zahl der Kanten begrenzt. Würde man die Thematik
+auf Bundes- oder Europaebene untersuchen könnte man gigantische
+Netzwerke erheben.
+
+##### 2. Die wichtigsten Netzwerkwerte
+
+Die wichtigsten Werte in einem Netzwerk werden festgestellt
+
+```{r Netzwerk vereinfacht?, message=FALSE, warning=FALSE, paged.print=TRUE}
+
+## Vereinfacht?
+is.simple(g)
+
+```
+
+```{r Komponenten überprüfen, message=FALSE, warning=FALSE, paged.print=TRUE}
+
+## Wie viele Komponenten?
+is.connected(g)
+components(g)
+```
+
+```{r Netzwerkdichte, message=FALSE, warning=FALSE, paged.print=TRUE}
+
+## Dichte
+edge_density(g, loops=FALSE)
+```
+
+Die Dichte des Netzwerkes beträgt 0,084.
+
+```{r Netzwerkumfang, message=FALSE, warning=FALSE, paged.print=TRUE}
+
+## Umfang
+diameter(g)
+```
+
+Der Umfang des Netzwerkes beträgt 5
+
+```{r längste Pfaddistanz, message=FALSE, warning=FALSE, paged.print=TRUE}
+
+## Pfaddistanzen
+farthest_vertices(g)
+```
+
+Der längste Pfad im Netzwerk führt von Querdenken zu Hr. Lobstedt und
+umfasst 5 Schritte
+
+#### 2. Teilnetzwerke
+
+Einige Aspekte wollen wir in Teilnetzwerken untersuchen. So lohnt sich
+beispielsweise ein Blick auf diejenigen Personen, die sich rassistisch,
+antisemitisch oder in sonstiger Weise rechtsextrem geäußert haben.
+
+-   Ein oder mehrere Netzwerke mit flourish (mit der Möglichkeit zu
+    filtern)
+
+    -   Filtern nach Aktueren mit Verbindungen zu bestimmten
+        Vereinigungen
+
+    -   Filtern nach anderen Eigenschaften (bspw. Alter o.ä.)
+
+-   *types* auf jeden Fall unterschiedlich darstellen
+
+-   Knotengröße nach Anzahl der Verbindungen verändern
+
+##### 1.Nachweislich rechtsextreme Äußerungen
+
+
+
+```{r Teilnetzwerk derer mit rechtsextremen Äußerungen, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+par(mar=c(0,0,0,0)) 
+statements <- delete_vertices(g, V(g)["statements" == "2"])  
+
+E(statements)[E(statements)$type == "1"]$color <- "black" 
+E(statements)[E(statements)$type == "2"]$color <- "blue"
+edge_density(statements, loops=FALSE)
+farthest_vertices(g)
+statements
+V(statements)
+plot(statements,
+     asp=0,
+     vertex.size=7,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color= "grey70", # keine Ränder bei den Vertices anzeigen
+     vertex.label=(statements)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(statements), # Kanten sollen sich nicht überlagern
+     main="Teilnetzwerk rechtsextreme Äußerungen", # Hauptüberschrift
+     sub="-") # Unterüberschrift
+
+```
+Das Netzwerk unterscheidet sich weder in der Dichte, noch in der 
+
+
+```{r Teilnetzwerk , message=FALSE, warning=FALSE, paged.print=FALSE}
+par(mfrow=c(1,2.5), mar=c(0,0,2,1))
+vertex_attr(g)$sex
+
+male <- delete.vertices(g, E(g)["sex" == 2])
+
+fem <- delete.vertices(g, E(g)["sex" == 1])
+
+vertex_attr(fem)$sex 
+
+plot(male,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_kk, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(male)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(male), # Kanten sollen sich nicht überlagern
+     main="Teilnetzwerk Männer", # Hauptüberschrift
+     sub="-") # Unterüberschrift
+
+plot(fem,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_kk, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(fem)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(fem), # Kanten sollen sich nicht überlagern
+     main="Teilnetzwerk Frauen", # Hauptüberschrift
+     sub="-") # Unterüberschrift
+
+par(mfrow=c(1,1), mar=c(0,0,0,0))
+```
+
+```{r Teilnetzwerk aller weiblichen Abgeordneten und Organisationen, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+fem <- delete.vertices(g, E(g)["sex" == 1])
+list.vertex.attributes(g) 
+vertex_attr(g)$sex 
+plot(fem,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_kk, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
+     main="Teilnetzwerk Frauen", # Hauptüberschrift
+     sub="-") # Unterüberschrift
+
+```
+
+
+
+AfD als Standard
+Junge Alternative
+Identitäre Bewegung
+Flügel
+    
+    
+    
+
+```{r Ego-Netzwerke im Vergleich, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+par(mfrow=c(1,1), mar=c(2,1,2,1))
+
+afdego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "AfD", mode="all")
+afdego1 <- afdego[[1]]
+
+jaego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Junge Alternative", mode="all")
+jaego1 <- jaego[[1]]
+
+ibego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Identitaere Bewegung", mode="all")
+ibego1 <- ibego[[1]]
+
+fego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Fluegel", mode="all")
+fego1 <- fego[[1]]
+
+E(afdego1)[E(afdego1)$type == 1]$color <- "grey70" 
+E(afdego1)[E(afdego1)$type == 2]$color <- "lightblue"
+
+edge_density(afdego1, loops=FALSE)
+edge_density(jaego1, loops=FALSE)
+edge_density(ibego1, loops=FALSE)
+edge_density(fego1, loops=FALSE)
+
+# AFD-EGO 
+plot(afdego1,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
+     main="Ego-Netzwerk AfD", # Hauptüberschrift
+     sub="Dichte = 0,101") # Unterüberschrift
+
+# Junge Alternative-EGO 
+plot(jaego1,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
+     main="Ego-Netzwerk Junge Alt.", # Hauptüberschrift
+     sub="Dichte = 0,222") # Unterüberschrift
+
+# IdentBew-EGO 
+plot(ibego1,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
+     main="Ego-Netzwerk Identitäre B.", # Hauptüberschrift
+     sub="Dichte = 0,307") # Unterüberschrift
+
+# Flügel-EGO 
+plot(fego1,
+     asp=0,
+     edge.arrow.size=.7, # Pfeilspitze auf .3
+     edge.color="grey70", # Kantenfarbe 70% Grau
+     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
+     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
+     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
+     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
+     main="Ego-Netzwerk Flügel", # Hauptüberschrift
+     sub="Dichte = 0,226") # Unterüberschrift
+
+
+```
+
+##### 1. Dichte
+
+##### 2. weitere Maße
+
+##### 3. Interessante Cluster/Komponenten
+
+#### 3. Zentralitätsmaße(?)
+
+### 3. Visualisierung (L)
+
+#### 1. Welche Ego-Netzwerke untersuchen wir?
+
+#### 2. Welche Arten und Weisen der Darstellung sind interessant?
+
+#### 3. Filterungen
+
+## 3. Schluss
+
+### 1. Zentrale Erkenntnisse (J)
+
+#### 1. Hypothesenüberprüfung
+
+#### 2. Netzwerkanalytische Erkenntnisse
+
+#### 3. Politische/Gesellschaftliche Erkenntnisse
+
+### 2. Limitationen (J)
+
+#### 1. Grenzen der Arbeit
+
+#### 2. Grenzen der Literatur
+
+#### 3. Grenzen der Wissenschaft?
+
+### 3. Fazit
+
+### 4. Teamreflexion (J)
+
+## 4. Anlagen
+
+### 1. Literatur (T)
+
+### 2. Quellen (Le)
+
+### 3. Datensatz \[githhub\]
+
+### 4. Verzeichnisse
+
+#### 1. Abbildungen
+
+#### 2. Tabellen
+
+#### 3. Abkürzungen?
+
+### 5. Eidesstattliche Versicherung
 
 **Codebuch**
 
@@ -114,32 +551,28 @@ Wir haben bereits etwas mit verschiedenen Visualisierungen herumprobiert:
 
 <https://raw.githubusercontent.com/hanniglu/sna-proj/main/nodes>
 
-*Die Recherchen sind noch nicht zu 100% abgeschlossen und dementsprechend unter Umständen noch nicht alle Verbindungen sichtbar.*
+Wie erwartet sind die Organisationen die Nodes mit den höchsten
+Degree-Werten.
 
-```{r Bibliotheken laden, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
-library(tidyverse)
-library(igraph)
-library(knitr)
-library(visNetwork)
-```
+```{r Dichte des Netzwerks}
+ds <- degree(g)
+ds
+par(mfrow=c(1,1), mar=c(0,0,0,0))
 
-```{r Datensatz laden und einlesen, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
-# Github
-el <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/edges", header=T, as.is=T, sep = ",")
-nodes <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/nodes", header=T, as.is=T, sep = ",")
-# Matrix erstellen
-edgematrix <-as.matrix(el)
-# Zusammenführen von Edge- und Nodelist als igraph-Objekt
-g <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=F)
-```
 
-```{r Visualisieren, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
 shape <-vcount(g)
 shape [V(g)$type == "1"] <- "square"
 shape [V(g)$type == "2"] <- "circle"
 shape [V(g)$type == "3"] <- "rectangle"
-plot.igraph(g,vertex.size=15,vertex.shape=shape,asp=0,
-    layout=layout.auto)
+V(g)[V(g)$type == 1]$color <- "red" 
+V(g)[V(g)$type == 2]$color <- "lightblue"
+V(g)[V(g)$type == 3]$color <- "blue"
+plot.igraph(g,vertex.shape=shape,
+    layout=layout.auto,edge.curved=curve_multiple(g),vertex.label=NA,vertex.size=ds, main="Gesamtnetzwerk")
+```
+
+```{r Degree-Werte der Personen}
+
 ```
 
 ```{r}
@@ -191,20 +624,4 @@ plot.igraph(g,vertex.shape=shape,
     layout=layout.auto,edge.curved=curve_multiple(g),vertex.label=NA,vertex.size=ds, main="Gesamtnetzwerk")
 plot(wolle1, main="Ego-Netzwerk Wolle")
 par(mfrow=c(1,1), mar=c(0,0,1,1))
-```
-
-```{r}
-ds <- degree(g)
-ds
-par(mfrow=c(1,1), mar=c(0,0,0,0))
-
-shape <-vcount(g)
-shape [V(g)$type == "1"] <- "square"
-shape [V(g)$type == "2"] <- "circle"
-shape [V(g)$type == "3"] <- "rectangle"
-V(g)[V(g)$type == 1]$color <- "red" 
-V(g)[V(g)$type == 2]$color <- "lightblue"
-V(g)[V(g)$type == 3]$color <- "blue"
-plot.igraph(g,vertex.shape=shape,
-    layout=layout.auto,edge.curved=curve_multiple(g),vertex.label=NA,vertex.size=ds, main="Gesamtnetzwerk")
 ```

@@ -16,15 +16,15 @@ id,name,vorname,sex,year,region,type,team,statements,protest,erfurter,stuttgarte
 15,Steyer,Joachim,1,1966,Hechingen-Muensingen (61),2,1,2,2,2,2
 16,Saenze,Emil,1,1950,Rottweil (53),2,1,1,2,2,1
 17,Wolle,Carola ,2,1963,Neckarsulm (20),2,1,1,1,1,1
-18,AfD,,3,2013,,1,,,,,
-19,Junge Alternative,,3,2013,,1,,,,,
-20,Fluegel,,3,2015,,1,,,,,
-21,Christen in der AfD,,3,2013,,1,,,,,
-22,Querdenken,,3,2020,,1,,,,,
-23,Identitaere Bewegung,,3,2012,,1,,,,,
-24,Demo fuer alle,,3,2016,,1,,,,,
-25,Erfurter Resolution,,3,2015,,1,,,,,
-26,Stuttgarter Aufruf,,3,2018,,1,,,,,
+18,AfD,99,99,2013,99,1,99,99,99,99,99
+19,Junge Alternative,99,99,2013,99,1,99,99,99,99,99
+20,Fluegel,99,99,2015,99,1,99,99,99,99,99
+21,Christen in der AfD,99,99,2013,99,1,99,99,99,99,99
+22,Querdenken,99,99,2020,99,1,99,99,99,99,99
+23,Identitaere Bewegung,99,99,2012,99,1,99,99,99,99,99
+24,Demo fuer alle,99,99,2016,99,1,99,99,99,99,99
+25,Erfurter Resolution,99,99,2015,99,1,99,99,99,99,99
+26,Stuttgarter Aufruf,99,99,2018,99,1,99,99,99,99,99
 27,Weidel,Alice Elisabeth,2,1979,Bodensee,2,2,1,2,2,2
 28,Hess,Martin Alexander,1,1971,Ludwigsburg,2,2,2,2,2,2
 29,Spaniel,Dirk,1,1971,Stuttgart 1,2,2,1,2,2,2
@@ -36,12 +36,12 @@ id,name,vorname,sex,year,region,type,team,statements,protest,erfurter,stuttgarte
 35,Seitz,Thomas Michael Konrad,1,1967,Emmendingen-Lahr,2,2,1,2,1,2
 36,Braun,Juergen Friedrich,1,1961,Waiblingen,2,2,2,2,2,2
 37,Lobstedt,Jochen,1,2001,Villingen-Schwenningen,2,3,1,1,1,1
-38,Koehler,Severin,1,,Ditzingen,2,3,1,2,1,1
-39,Allmendinger,Armin,1,,Ellwangen,2,3,1,1,2,2
-40,Hilgers,Phillip,1,,Mannheim,2,3,2,2,2,2
-41,Schneller,Milena,2,,Reutlingen-Tübingen,2,3,2,2,2,2
-42,Malek,Fabienne,2,,Ortenau,2,3,2,2,2,2
+38,Koehler,Severin,1,99,Ditzingen,2,3,1,2,1,1
+39,Allmendinger,Armin,1,99,Ellwangen,2,3,1,1,2,2
+40,Hilgers,Phillip,1,99,Mannheim,2,3,2,2,2,2
+41,Schneller,Milena,2,99,Reutlingen-Tübingen,2,3,2,2,2,2
+42,Malek,Fabienne,2,99,Ortenau,2,3,2,2,2,2
 43,Schultes,Simon,1,1996,Tübingen,2,3,2,2,2,2
-44,Braun,Mike,1,,,2,3,2,1,2,2
+44,Braun,Mike,1,99,99,2,3,2,1,2,2
 45,Lind,Adrian,1,2002,Pforzheim,2,3,1,2,2,2
 46,Kimmig,Aaron,1,1989,Freiburg,2,3,1,2,2,2

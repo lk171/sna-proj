@@ -3,17 +3,17 @@ title: "226305 Forschungsbericht"
 author: "Lukas Hannig, Leonie Kupferschmidt, Jana Prochazka, Antonia Zwicker"
 date: "Wintersemester 2021"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '4'
-  pdf_document:
-    toc: yes
-    toc_depth: '4'
   html_document:
     df_print: paged
     toc: yes
     toc_depth: 4
     number_sections: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
+  word_document:
+    toc: yes
+    toc_depth: '4'
 subtitle: Das Netzwerk der Afd BaWü
 editor_options: 
   markdown: 
@@ -100,7 +100,7 @@ Eine unserer ersten Organisationen war Christen in der AfD, da ... ?
 
 Über Christen in der AfD wurden wir auf die Demo für alle aufmerksam und
 entschieden uns dazu die Verbindungen unserer Akteure zu Demo für alle
-zu untersuchen. 
+zu untersuchen.
 
 Wir haben uns dazu entschieden Querdenken als einen Akteur in unser
 Netzwerk mit aufzunehmen, da der AfD immer wieder Mitschuld an der
@@ -124,16 +124,21 @@ ihn in unser Netzwerk aufzunehmen.
 
 #### Datenzugang
 
-#### Bereinigung des Datensatzes
-
 #### Codebuch
 
-### Auswertung und Analyse der Daten
+### Analyse und Interpretation der Daten
 
 Die Auswertung und Analyse der Daten erfolgte hauptsächlich in RStudio.
 Wir verwenden die Bibliotheken tidyverse, igraph, knitr und visNetwork.
+Das Netzwerk besteht insgesamt aus 46 Knoten und 87 Kanten, die
+ausschließlich zwischen Personen und Organisationen liegen. Daten zu
+Beziehungen zwischen den Personen zu erheben hätte die Forschung
+wesentlich verkompliziert. Deshalb wurden nur die Beziehungen zwischen jeweils Personen und Organisationen erfasst.  Da die Organisation Christen in der AfD keine Verbindungen hat, wird sie aus dem Netzwerk entfernt. Nach dieser Bereinigung besitzt das Netzwerk nur noch 45 Knoten. Das Netzwerk
+ist ungerichtet, aber gewichtet, da bei den meisten Beziehungen eine
+Abstufung erfolgen konnte.
 
-```{r Bibliotheken laden, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+
+```{r Bibliotheken laden, message=FALSE, warning=TRUE, include=FALSE, paged.print=FALSE}
 library(tidyverse)
 library(igraph)
 library(knitr)
@@ -142,131 +147,263 @@ library(visNetwork)
 
 Nachdem die Daten in Google Spreadsheets erfasst und als CSV-Datei
 exportiert wurden, konnten diese problemlos auf Github hochgeladen
-werden. Der Import in RStudio erfolgt im nächsten Schritt.
+werden. Von dort aus können die Daten direkt in RStudio importiert und dort analysiert und visualisiert werden.
 
-```{r Datensatz laden und igraph erstellen, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+```{r Datensatz laden und igraph erstellen, message=FALSE, warning=TRUE, include=FALSE, paged.print=FALSE}
 # Github
 el <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/edges", header=T, as.is=T, sep = ",")
 nodes <- read.csv("https://raw.githubusercontent.com/hanniglu/sna-proj/main/nodes", header=T, as.is=T, sep = ",")
 # Matrix erstellen
 edgematrix <-as.matrix(el)
 # igraph-Objekt
-g <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=F)
+g_compl <- graph_from_data_frame(d=edgematrix, vertices=nodes, directed=F)
+g <- delete.vertices(simplify(g_compl), degree(g_compl)==0)
 ```
 
-#### Gesamtnetzwerk
+### Gesamtnetzwerk
 
 Zunächst einmal verschaffen wir uns einen Überblick über das
-Gesamtnetzwerk. Zur besseren Übersichtlichkeit werden die Nodes schon
-einmal anhand ihrer Degree-Werte skaliert.
+Gesamtnetzwerk. Zur besseren Übersichtlichkeit werden die Nodes anhand ihrer Degree-Werte skaliert.
 
-```{r Überischt Gesamtnetzwerk, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE}
+```{r Untersuchung Gesamtnetzwerk, message=FALSE, warning=TRUE, include=FALSE, paged.print=FALSE}
 gind <- degree(g, mode = "in")
-E(g)[E(g)$type == "1"]$color <- "orange" 
-E(g)[E(g)$type == "2"]$color <- "blue"
+V(g)[V(g)$type == "1"]$color <- "orange" 
+V(g)[V(g)$type == "2"]$color <- "lightblue"
+delete.vertices(simplify(g), degree(g)==0)
+```
+
+```{r Übersicht Gesamtnetzwerk, echo=FALSE, message=FALSE, warning=TRUE, paged.print=FALSE, fig.height=10, fig.width=14}
 plot(g,
      asp=0,
-     edge.arrow.size=.7, # Pfeilspitze auf .3
-     edge.color="grey70", # Kantenfarbe 70% Grau
-     layout=layout_with_kk, # Layout-Algorithmus Kamada-Kawai
-     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
-     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
-     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
-     main="Gesamtnetzwerk", # Hauptüberschrift
-     sub="Organisation = Blau - Person = Orange", # Unterüberschrift
-     vertex.size=gind*0.8+5) # Größe der Knoten
+     edge.arrow.size=.7,
+     edge.color="grey70",
+     layout=layout_with_kk,
+     vertex.frame.color=NA,
+     vertex.label=(g)$name,
+     edge.curved=curve_multiple(g),
+     main="Gesamtnetzwerk",
+     sub="Organisation = Blau // Person = Orange",
+     vertex.size=gind*0.8+5)
 ```
 
-##### Größe des Netzwerkes
 
-Das Netzwerk besteht insgesamt aus 46 Knoten und 87 Kanten, die
-ausschließlich zwischen Personen und Organisationen liegen.
+**Die wichtigsten Netzwerkwerte**
 
-Da wir an die Größe der ausgewählten Gruppen gebunden sind, ist die
-Netzwerkgröße und die Zahl der Kanten begrenzt. Würde man die Thematik
-auf Bundes- oder Europaebene untersuchen könnte man gigantische
-Netzwerke erheben.
+Einige grundsätzliche Untersuchungen geben erste Aufschlüsse über das Netzwerk.
 
-##### Die wichtigsten Netzwerkwerte
-
-Die wichtigsten Werte in einem Netzwerk werden festgestellt
-
-```{r Netzwerk vereinfacht?, message=FALSE, warning=FALSE, paged.print=TRUE}
-
+```{r Wichtige Netzwerkwerte, message=FALSE, warning=FALSE, include=FALSE, paged.print=TRUE}
 ## Vereinfacht?
 is.simple(g)
-
-```
-
-```{r Komponenten überprüfen, message=FALSE, warning=FALSE, paged.print=TRUE}
-
 ## Wie viele Komponenten?
 is.connected(g)
 components(g)
-```
-
-```{r Netzwerkdichte, message=FALSE, warning=FALSE, paged.print=TRUE}
-
 ## Dichte
 edge_density(g, loops=FALSE)
-```
-
-Die Dichte des Netzwerkes beträgt 0,084.
-
-```{r Netzwerkumfang, message=FALSE, warning=FALSE, paged.print=TRUE}
-
 ## Umfang
 diameter(g)
-```
-
-Der Umfang des Netzwerkes beträgt 5
-
-```{r längste Pfaddistanz, message=FALSE, warning=FALSE, paged.print=TRUE}
-
-## Pfaddistanzen
+## Pfaddistanz
 farthest_vertices(g)
 ```
 
-Der längste Pfad im Netzwerk führt von Querdenken zu Hr. Lobstedt und
-umfasst 5 Schritte
+Das Netzwerk ist bereits vereinfacht. Es gibt lediglich eine Komponente im Netzwerk.Die Dichte im Gesamtnetzwerk liegt bei 8,78%. Der längste Pfad im Netzwerk führt von der Organisation Querdenken zu Hr. Lobstedt und ist 5 Schritte lang.
 
-#### Teilnetzwerke
+### Teilnetzwerke
 
-Einige Aspekte werden in Teilnetzwerken untersucht. So lohnt sich
-beispielsweise ein Blick auf diejenigen Personen, die sich rassistisch,
-antisemitisch oder in sonstiger Weise rechtsextrem geäußert haben.
+#### Ego-Netzwerke ausgewählter Organisationen
 
--   Ein oder mehrere Netzwerke mit flourish (mit der Möglichkeit zu
-    filtern)
+Im nächsten Schritt werden die Organisationen untersucht, die die
+meisten Verbindungen aufweisen. Das sind die AfD, die Junge Alternative,
+der Flügel und die Identitäre Bewegung.
 
-    -   Filtern nach Aktueren mit Verbindungen zu bestimmten
-        Vereinigungen
+Die einzelnen Netzwerke unterscheiden sich gerade in der Dichte und der
+Zahl der Mitglieder erheblich. Ob die steigende Dichte mit der
+steigenden politischen Extremität einhergeht, lässt sich nicht mit
+100%iger Wahrscheinlichkeit belegen, ist jedoch vorstellbar.
 
-    -   Filtern nach anderen Eigenschaften (bspw. Alter o.ä.)
+*Alternative für Deutschland*
 
--   *types* auf jeden Fall unterschiedlich darstellen
+```{r Ego-Netzwerk AfD, echo=FALSE, fig.height=10, fig.width=14, message=FALSE, warning=FALSE, paged.print=FALSE}
 
--   Knotengröße nach Anzahl der Verbindungen verändern
+afdego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "AfD", mode="all")
+
+afdego1 <- afdego[[1]]
+
+# AFD-EGO 
+
+plot(afdego1,
+     asp=0,
+     edge.arrow.size=.7,
+     edge.color="grey70",
+     layout=layout_with_kk,
+     vertex.frame.color=NA,
+     vertex.label=(g)$name,
+     edge.curved=curve_multiple(g),
+     main="Ego-Netzwerk AfD im 2. Grad",
+     sub="Dichte = 10,15%
+     Knoten = 36 von 46")
+
+plot(g,
+     asp=0,
+     edge.curved=.2,
+     vertex.size=degree(g,mode="all")+3,
+     vertex.frame.color=NA,
+     layout=layout_as_star(g, center = V(g)[18]),
+     edge.width=E(g)$relation,
+     edge.curved=curve_multiple(g),
+     main="Gesamtnetzwerk mit der AfD im Fokus", 
+     sub="Knotengröße nach Degree-Wert (deg+3 zur besseren Übersichtlichkeit)",
+     edge.width=E(g)$relation
+     )
+
+gorder(afdego1)
+
+edge_density(afdego1, loops=FALSE)
+
+```
+
+*Junge Alternative*
+
+```{r Ego-Netzwerk JA, echo=FALSE, fig.height=10, fig.width=14, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+jaego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Junge Alternative", mode="all")
+
+jaego1 <- jaego[[1]]
+
+# JA-EGO 
+
+plot(jaego1,
+     asp=0,
+     edge.arrow.size=.7,
+     edge.color="grey70",
+     layout=layout_with_kk,
+     vertex.frame.color=NA,
+     vertex.label=(g)$name,
+     edge.curved=curve_multiple(g),
+     main="Ego-Netzwerk JA im 2. Grad",
+     sub="Dichte = 22,22%
+     Knoten = 18 von 46")
+
+plot(g,
+     asp=0,
+     edge.curved=.2,
+     vertex.size=degree(g,mode="all")+3,
+     vertex.frame.color=NA,
+     layout=layout_as_star(g, center = V(g)[19]),
+     edge.width=E(g)$relation,
+     edge.curved=curve_multiple(g),
+     main="Gesamtnetzwerk mit der JA im Fokus", 
+     sub="Knotengröße nach Degree-Wert (deg+3 zur besseren Übersichtlichkeit)",
+     edge.width=E(g)$relation
+     )
+
+gorder(jaego1)
+
+edge_density(jaego1, loops=FALSE)
+
+```
+
+*Der Flügel*
+
+```{r Ego-Netzwerk Fluegel, echo=FALSE, fig.height=10, fig.width=14, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+fego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Fluegel", mode="all")
+
+fego1 <- fego[[1]]
+
+# Fluegel-EGO 
+
+plot(fego1,
+     asp=0,
+     edge.arrow.size=.7,
+     edge.color="grey70",
+     layout=layout_with_kk,
+     vertex.frame.color=NA,
+     vertex.label=(g)$name,
+     edge.curved=curve_multiple(g),
+     main="Ego-Netzwerk Fluegel im 2. Grad",
+     sub="Dichte = 22,63%
+     Knoten = 20 von 46")
+
+plot(g,
+     asp=0,
+     edge.curved=.2,
+     vertex.size=degree(g,mode="all")+3,
+     vertex.frame.color=NA,
+     layout=layout_as_star(g, center = V(g)[20]),
+     edge.width=E(g)$relation,
+     edge.curved=curve_multiple(g),
+     main="Gesamtnetzwerk mit dem Fluegel im Fokus", 
+     sub="Knotengröße nach Degree-Wert (deg+3 zur besseren Übersichtlichkeit)",
+     edge.width=E(g)$relation
+     )
+
+gorder(fego1)
+
+edge_density(fego1, loops=FALSE)
+
+```
+
+*Identitäre Bewegung*
+
+```{r Ego-Netzwerk IB, echo=FALSE, fig.height=10, fig.width=14, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+ibego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Identitaere Bewegung", mode="all")
+
+ibego1 <- ibego[[1]]
+
+# IB-EGO 
+
+plot(ibego1,
+     asp=0,
+     edge.arrow.size=.7,
+     edge.color="grey70",
+     layout=layout_with_kk,
+     vertex.frame.color=NA,
+     vertex.label=(g)$name,
+     edge.curved=curve_multiple(g),
+     main="Ego-Netzwerk IB im 2. Grad",
+     sub="Dichte = 30,76%
+     Knoten = 14 von 46")
+
+plot(g,
+     asp=0,
+     edge.curved=.2,
+     vertex.size=degree(g,mode="all")+3,
+     vertex.frame.color=NA,
+     layout=layout_as_star(g, center = V(g)[22]),
+     edge.width=E(g)$relation,
+     edge.curved=curve_multiple(g),
+     main="Gesamtnetzwerk mit der Identitären Bewegung im Fokus", 
+     sub="Knotengröße nach Degree-Wert (deg+3 zur besseren Übersichtlichkeit)",
+     edge.width=E(g)$relation
+     )
+
+gorder(ibego1)
+
+edge_density(ibego1, loops=FALSE)
+
+```
 
 ##### Nachweislich rechtsextreme Äußerungen
 
-```{r Teilnetzwerk derer mit rechtsextremen Äußerungen, message=FALSE, warning=FALSE, paged.print=FALSE}
+So lohnt sich zudem ein Blick auf diejenigen Personen, die sich
+rassistisch, antisemitisch oder in sonstiger Weise rechtsextrem geäußert
+haben.
+
+```{r Teilnetzwerk derer mit rechtsextremen Äußerungen, message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=10, fig.width=14}
 
 par(mar=c(0,0,0,0)) 
-statements <- delete_vertices(g, V(g)["statements" == 2])  
 
-E(statements)[E(statements)$type == 1]$color <- "black" 
-E(statements)[E(statements)$type == 2]$color <- "blue"
-edge_density(statements, loops=FALSE)
-farthest_vertices(g)
-statements
+statements <- delete_vertices(g, V(g)[statements == 2]) 
+
 V(statements)
+
 plot(statements,
      asp=0,
      vertex.size=7,
      edge.arrow.size=.7, # Pfeilspitze auf .3
      edge.color="grey70", # Kantenfarbe 70% Grau
-     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
+     layout=layout_with_kk, # Layout-Algorithmus Kamada-Kawai
      vertex.frame.color= "grey70", # keine Ränder bei den Vertices anzeigen
      vertex.label=(statements)$name, # Nachnamen als Labels anzeigen
      edge.curved=curve_multiple(statements), # Kanten sollen sich nicht überlagern
@@ -274,8 +411,6 @@ plot(statements,
      sub="-") # Unterüberschrift
 
 ```
-
-Das Netzwerk unterscheidet sich weder in der Dichte, noch in der
 
 ```{r Teilnetzwerk , message=FALSE, warning=FALSE, paged.print=FALSE}
 par(mfrow=c(1,2.5), mar=c(0,0,2,1))
@@ -328,95 +463,30 @@ plot(fem,
      main="Teilnetzwerk Frauen", # Hauptüberschrift
      sub="-") # Unterüberschrift
 
+
+# Zählt die Cliquen im Netzwerk
+clique_num(g)
+
+# listet die Cliquen im Netzwerk auf
+lc <- largest_cliques(g)
+lc
+
+# Umwandlung für Visualisierung
+V(g)$label <- V(g)$name
+s_lc <- subgraph(g, lc[[1]])
+
+plot(s_lc, 
+     layout=layout.fruchterman.reingold, 
+     vertex.color="gold", 
+     edge.arrow.size = 0.5, 
+     edge.color = "gray80",
+     main = "Größte Clique im CR/PR Netzwerk")
+
 ```
 
 AfD als Standard Junge Alternative Identitäre Bewegung Flügel
 
-```{r Ego-Netzwerke im Vergleich, message=FALSE, warning=FALSE, paged.print=FALSE}
-
-par(mfrow=c(1,1), mar=c(2,1,2,1))
-
-afdego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "AfD", mode="all")
-afdego1 <- afdego[[1]]
-
-jaego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Junge Alternative", mode="all")
-jaego1 <- jaego[[1]]
-
-ibego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Identitaere Bewegung", mode="all")
-ibego1 <- ibego[[1]]
-
-fego <- make_ego_graph(g, order = 2, nodes = V(g)$name == "Fluegel", mode="all")
-fego1 <- fego[[1]]
-
-edge_density(afdego1, loops=FALSE)
-edge_density(jaego1, loops=FALSE)
-edge_density(ibego1, loops=FALSE)
-edge_density(fego1, loops=FALSE)
-
-# AFD-EGO 
-plot(afdego1,
-     asp=0,
-     edge.arrow.size=.7, # Pfeilspitze auf .3
-     edge.color="grey70", # Kantenfarbe 70% Grau
-     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
-     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
-     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
-     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
-     main="Ego-Netzwerk AfD - 2. Grades", # Hauptüberschrift
-     sub="Dichte = 0,101") # Unterüberschrift
-
-# Junge Alternative-EGO 
-plot(jaego1,
-     asp=0,
-     edge.arrow.size=.7, # Pfeilspitze auf .3
-     edge.color="grey70", # Kantenfarbe 70% Grau
-     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
-     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
-     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
-     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
-     main="Ego-Netzwerk Junge Alt. - 2. Grades", # Hauptüberschrift
-     sub="Dichte = 0,222") # Unterüberschrift
-
-# IdentBew-EGO 
-plot(ibego1,
-     asp=0,
-     edge.arrow.size=.7, # Pfeilspitze auf .3
-     edge.color="grey70", # Kantenfarbe 70% Grau
-     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
-     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
-     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
-     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
-     main="Ego-Netzwerk Identitäre B. - 2. Grades", # Hauptüberschrift
-     sub="Dichte = 0,307") # Unterüberschrift
-
-# Flügel-EGO 
-plot(fego1,
-     asp=0,
-     edge.arrow.size=.7, # Pfeilspitze auf .3
-     edge.color="grey70", # Kantenfarbe 70% Grau
-     layout=layout_with_fr, # Layout-Algorithmus Kamada-Kawai
-     vertex.frame.color=NA, # keine Ränder bei den Vertices anzeigen
-     vertex.label=(g)$name, # Nachnamen als Labels anzeigen
-     edge.curved=curve_multiple(g), # Kanten sollen sich nicht überlagern
-     main="Ego-Netzwerk Flügel - 2. Grades", # Hauptüberschrift
-     sub="Dichte = 0,226") # Unterüberschrift
-
-
-```
-
-##### Dichte
-
-Die Netzwerke unterscheiden sich gerade in der Dichte erheblich. Ob die
-steigende Dichte mit der steigenden politischen Extremität einhergeht
-lässt sich nicht mit 100% belegen, ist jedoch vorstellbar.
-
-##### weitere Maße
-
-##### Interessante Cluster/Komponenten
-
-#### Zentralitätsmaße(?)
-
-### Visualisierung (L)
+### Visualisierung
 
 #### Welche Ego-Netzwerke untersuchen wir?
 

@@ -36,12 +36,12 @@ id,name,vorname,sex,year,region,type,team,statements,protest,erfurter,stuttgarte
 35,Seitz,Thomas Michael Konrad,1,1967,Emmendingen-Lahr,2,2,1,2,1,2
 36,Braun,Juergen Friedrich,1,1961,Waiblingen,2,2,2,2,2,2
 37,Lobstedt,Jochen,1,2001,Villingen-Schwenningen,2,3,1,1,1,1
-38,Koehler,Severin,1,99,Ditzingen,2,3,1,2,1,1
-39,Allmendinger,Armin,1,99,Ellwangen,2,3,1,1,2,2
-40,Hilgers,Phillip,1,99,Mannheim,2,3,2,2,2,2
-41,Schneller,Milena,2,99,Reutlingen-Tübingen,2,3,2,2,2,2
-42,Malek,Fabienne,2,99,Ortenau,2,3,2,2,2,2
+38,Koehler,Severin,1,2007,Ditzingen,2,3,1,2,1,1
+39,Allmendinger,Armin,1,2007,Ellwangen,2,3,1,1,2,2
+40,Hilgers,Phillip,1,2007,Mannheim,2,3,2,2,2,2
+41,Schneller,Milena,2,2007,Reutlingen-Tübingen,2,3,2,2,2,2
+42,Malek,Fabienne,2,2007,Ortenau,2,3,2,2,2,2
 43,Schultes,Simon,1,1996,Tübingen,2,3,2,2,2,2
-44,Braun,Mike,1,99,99,2,3,2,1,2,2
+44,Braun,Mike,1,99,2007,2,3,2,1,2,2
 45,Lind,Adrian,1,2002,Pforzheim,2,3,1,2,2,2
 46,Kimmig,Aaron,1,1989,Freiburg,2,3,1,2,2,2
